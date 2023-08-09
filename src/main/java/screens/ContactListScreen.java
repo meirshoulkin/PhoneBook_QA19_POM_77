@@ -3,10 +3,12 @@ package screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.util.List;
 
 public class ContactListScreen extends BaseScreen{
+
 
 
     public ContactListScreen(AppiumDriver<MobileElement> driver) {
@@ -51,6 +53,12 @@ public class ContactListScreen extends BaseScreen{
     }
 
 
-
-
+    public boolean isFindAddedContactListPresent(String name, String phoneNumber) {
+        for (int i = 0; i < 7; i++){
+            if(names.get(i).getText().equals(name) && phones.get(i).getText().equals(phoneNumber)){
+                return true;
+            }
+        }
+       return false;
+    }
 }

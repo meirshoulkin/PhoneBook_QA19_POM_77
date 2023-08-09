@@ -3,6 +3,7 @@ package tests;
 import config.AppuimConfig;
 import models.Auth;
 import models.Contact;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import screens.AuthenticationScreen;
@@ -16,7 +17,7 @@ public class AddNewContactTests extends AppuimConfig {
     int i = new Random().nextInt(1000) + 1000;
 
     @BeforeMethod
-    public void precondition(){
+    public void precondition() {
         new AuthenticationScreen(driver)
                 .login(Auth.builder()
                         .email("abc@def.com")
@@ -25,7 +26,7 @@ public class AddNewContactTests extends AppuimConfig {
     }
 
     @Test
-    public void addNewContactPositive(){
+    public void addNewContactPositive() {
 
         Contact contact = Contact.builder()
                 .name("Add_" + i)
@@ -36,11 +37,14 @@ public class AddNewContactTests extends AppuimConfig {
                 .description("Add_" + i + "_NewPositive")
                 .build();
 
-        new ContactListScreen(driver)
-                .openContactForm()
-                .fillContactForm(contact)
-                .submitContact();
 
+        Assert.assertTrue(
+                new ContactListScreen(driver)
+                        .openContactForm()
+                        .fillContactForm(contact)
+                        .submitContact()
+                        .isFindAddedContactListPresent("QA38 Automation", "123456781944")
+        );
     }
 
 }
