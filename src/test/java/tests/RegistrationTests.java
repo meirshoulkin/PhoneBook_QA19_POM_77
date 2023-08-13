@@ -11,8 +11,6 @@ import screens.SplashScreen;
 
 import java.util.Random;
 
-
-
 public class RegistrationTests extends AppuimConfig {
 
     int i = new Random().nextInt(1000) + 1000;
