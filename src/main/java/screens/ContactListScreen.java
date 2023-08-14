@@ -193,12 +193,23 @@ public class ContactListScreen extends BaseScreen{
     }
 
     public boolean isEndOfList(){
-        // your brilliant code is here
-        return false;
+        MobileElement contact = contacts.get(6);
+        while (phones.contains(!equals(contact))) {
+            new ContactListScreen(driver).scrollList();
+            return false;
+        }
+        return true;
     }
 
     public ContactListScreen isContactAddedScroll(Contact contact){
+        if(isEndOfList()){
+            boolean checkName = checkContainsText(names, contact.getName() + " " + contact.getLastName());
+            boolean checkPhone = checkContainsText(phones, contact.getPhone());
+            Assert.assertTrue(checkName && checkPhone);
+        }
+            return this;
 
-        return this;
+
+
     }
 }
